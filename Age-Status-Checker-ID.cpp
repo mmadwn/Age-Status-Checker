@@ -1,15 +1,3 @@
-/*
-Kelompok Presentasi DKP mengenai Status Seseorang
-Anggota Kelompok:
-1. Jeremy
-2. Puput
-3. Ridwan
-4. Irham
-5. Azzah
-25 November 2018
-14.46
-*/
-
 #include <iostream>
 using namespace std;
 
