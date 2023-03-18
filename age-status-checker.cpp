@@ -3,7 +3,7 @@ using namespace std;
 
 int main(){
     char yt;
-// Menu Utama Program
+//Main Menu
 do{
 cout << "Wellcome!!!  Selamat Datang!!!" << endl <<endl;
 cout << "================================================================================================="<<endl;
