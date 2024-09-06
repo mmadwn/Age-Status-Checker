@@ -1,0 +1,31 @@
+# Compiled object files
+*.o
+*.out
+financial_calculator
+
+# Data files
+user_data.csv
+tujuan_keuangan.txt
+laporan_keuangan.txt
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~
+*.bak
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+
+# Build directories
+build/
+bin/
