@@ -2,17 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-
-### Added
-- New features that haven't been released yet
-
-### Changed
-- Changes to existing functionality
-
-### Fixed
-- Bug fixes
-
 ## [1.1.0] - 2024-09-06
 
 ### Added
@@ -29,7 +18,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Various bug fixes and performance improvements
 
-## [1.0.0] - 2024-09-06
+## [1.0.0] - 2023-06-03
 
 ### Added
 - Initial release of Finance Planner
