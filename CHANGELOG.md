@@ -2,18 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.2.0] - 2024-12-01
-
-### Added
-- Home purchase planning feature
-- Child education planning feature
-- Life insurance needs calculation
-- Financial data visualization in comparison table format
-- User data saving and loading
-
-### Changed
-- Enhanced financial analysis by adding more factors
-
 ## [1.1.0] - 2024-09-06
 
 ### Added
