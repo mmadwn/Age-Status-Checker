@@ -8,6 +8,8 @@ user_data.csv
 tujuan_keuangan.txt
 laporan_keuangan.txt
 user_data.txt
+financial_analysis.csv
+financial_report.txt
 
 # IDE-specific files
 .vscode/

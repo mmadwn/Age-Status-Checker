@@ -13,91 +13,91 @@ using namespace std;
 
 struct UserData
 {
-    int usia;
-    double pendapatanTahunan;
-    double tabunganSaatIni;
+    int age;
+    double annualIncome;
+    double currentSavings;
 };
 
-/// Fungsi untuk menghitung target tabungan pensiun
-double hitungTargetPensiun(int usia, double pendapatanTahunan)
+/// Function to calculate retirement savings target
+double calculateRetirementTarget(int age, double annualIncome)
 {
-    int tahunMenujuPensiun = 65 - usia;
-    double targetPensiun = pendapatanTahunan * 0.8 * 20;  // Asumsi 80% pendapatan selama 20 tahun
-    return targetPensiun / pow(1.07, tahunMenujuPensiun); // Asumsi 7% return investasi tahunan
+    int yearsUntilRetirement = 65 - age;
+    double retirementTarget = annualIncome * 0.8 * 20;  // Assume 80% income for 20 years
+    return retirementTarget / pow(1.07, yearsUntilRetirement); // Assume 7% annual investment return
 }
 
-// Fungsi untuk memberikan saran investasi
-string saranInvestasi(int usia)
+// Function to provide investment advice
+string getInvestmentAdvice(int age)
 {
-    if (usia < 30)
+    if (age < 30)
     {
-        return "Fokus pada pertumbuhan agresif. Alokasikan 80-90% ke saham.";
+        return "Focus on aggressive growth. Allocate 80-90% to stocks.";
     }
-    else if (usia < 40)
+    else if (age < 40)
     {
-        return "Pertumbuhan moderat. Alokasikan 70-80% ke saham, sisanya ke obligasi.";
+        return "Moderate growth. Allocate 70-80% to stocks, the rest to bonds.";
     }
-    else if (usia < 50)
+    else if (age < 50)
     {
-        return "Mulai lebih konservatif. 60-70% saham, 30-40% obligasi.";
+        return "Start being more conservative. 60-70% stocks, 30-40% bonds.";
     }
-    else if (usia < 60)
+    else if (age < 60)
     {
-        return "Lebih berhati-hati. 50-60% saham, 40-50% obligasi.";
+        return "Be more cautious. 50-60% stocks, 40-50% bonds.";
     }
     else
     {
-        return "Konservatif. 30-40% saham, 60-70% obligasi dan instrumen aman.";
+        return "Conservative. 30-40% stocks, 60-70% bonds and safe instruments.";
     }
 }
-// Fungsi untuk menghitung anggaran bulanan sederhana
-void hitungAnggaran(double pendapatanBulanan)
+// Function to calculate simple monthly budget
+void calculateBudget(double monthlyIncome)
 {
-    cout << "Anggaran Bulanan yang Disarankan:\n";
-    cout << "Kebutuhan (50%): Rp" << fixed << setprecision(2) << pendapatanBulanan * 0.5 << endl;
-    cout << "Keinginan (30%): Rp" << pendapatanBulanan * 0.3 << endl;
-    cout << "Tabungan (20%): Rp" << pendapatanBulanan * 0.2 << endl;
+    cout << "Recommended Monthly Budget:\n";
+    cout << "Needs (50%): $" << fixed << setprecision(2) << monthlyIncome * 0.5 << endl;
+    cout << "Wants (30%): $" << monthlyIncome * 0.3 << endl;
+    cout << "Savings (20%): $" << monthlyIncome * 0.2 << endl;
 }
 
-// Fungsi baru untuk perencanaan pembelian rumah
-double hitungCicilanRumah(double hargaRumah, int tenorTahun, double sukuBunga)
+// New function for home purchase planning
+double calculateMortgagePayment(double housePrice, int loanTerm, double interestRate)
 {
-    double bungaBulanan = sukuBunga / 12 / 100;
-    int totalBulan = tenorTahun * 12;
-    return hargaRumah * bungaBulanan * pow(1 + bungaBulanan, totalBulan) / (pow(1 + bungaBulanan, totalBulan) - 1);
+    double monthlyInterestRate = interestRate / 12 / 100;
+    int totalMonths = loanTerm * 12;
+    return housePrice * monthlyInterestRate * pow(1 + monthlyInterestRate, totalMonths) / (pow(1 + monthlyInterestRate, totalMonths) - 1);
 }
 
-// Fungsi baru untuk perencanaan pendidikan anak
-double hitungBiayaPendidikan(double biayaAwal, int tahunMulai, int lamaPendidikan, double inflasiTahunan)
+// New function for child education planning
+double calculateEducationCost(double initialFee, int startYear, int duration, double annualInflation)
 {
-    double totalBiaya = 0;
-    for (int i = 0; i < lamaPendidikan; i++)
+    double totalCost = 0;
+    for (int i = 0; i < duration; i++)
     {
-        totalBiaya += biayaAwal * pow(1 + inflasiTahunan / 100, tahunMulai + i);
+        totalCost += initialFee * pow(1 + annualInflation / 100, startYear + i);
     }
-    return totalBiaya;
+    return totalCost;
 }
 
-// Fungsi baru untuk perhitungan asuransi jiwa
-double hitungKebutuhanAsuransiJiwa(double pendapatanTahunan, int usia, int usiapensiun)
+// New function for life insurance needs calculation
+double calculateLifeInsuranceNeeds(double annualIncome, int age, int retirementAge)
 {
-    int tahunKerja = usiapensiun - usia;
-    return pendapatanTahunan * tahunKerja * 0.6; // Asumsi 60% pendapatan perlu diganti
+    int workingYears = retirementAge - age;
+    return annualIncome * workingYears * 0.6; // Assume 60% income needs to be replaced
 }
 
-// Fungsi untuk menyimpan data pengguna
-void simpanData(const UserData &data)
+// Function to save user data
+void saveData(const UserData &data)
 {
     ofstream file("user_data.csv", ios::app);
     if (file.is_open())
     {
-        file << data.usia << "," << data.pendapatanTahunan << "," << data.tabunganSaatIni << "\n";
+        file << data.age << "," << data.annualIncome << "," << data.currentSavings << "\n";
         file.close();
     }
 }
 
-// Fungsi untuk membaca data pengguna
-vector<UserData> bacaData()
+// Function to read user data
+vector<UserData> readData()
 {
     vector<UserData> dataList;
     ifstream file("user_data.csv");
@@ -108,24 +108,24 @@ vector<UserData> bacaData()
         UserData data;
         string temp;
         getline(ss, temp, ',');
-        data.usia = stoi(temp);
+        data.age = stoi(temp);
         getline(ss, temp, ',');
-        data.pendapatanTahunan = stod(temp);
+        data.annualIncome = stod(temp);
         getline(ss, temp, ',');
-        data.tabunganSaatIni = stod(temp);
+        data.currentSavings = stod(temp);
         dataList.push_back(data);
     }
     return dataList;
 }
 
-// Tambahkan fungsi baru untuk menampilkan tabel perbandingan
-void tampilkanTabelPerbandingan(const vector<double> &data, const vector<string> &labels)
+// Add new function to display comparison table
+void displayComparisonTable(const vector<double> &data, const vector<string> &labels)
 {
-    cout << "\nTabel Perbandingan Finansial:\n";
+    cout << "\nFinancial Comparison Table:\n";
     cout << string(70, '-') << "\n";
-    cout << setw(25) << left << "Kategori" << "|" 
-         << setw(20) << right << "Nilai (Rp)" << " |" 
-         << setw(20) << right << "Persentase" << "\n";
+    cout << setw(25) << left << "Category" << "|" 
+         << setw(20) << right << "Value ($)" << " |" 
+         << setw(20) << right << "Percentage" << "\n";
     cout << string(70, '-') << "\n";
 
     double total = accumulate(data.begin(), data.end(), 0.0);
@@ -144,359 +144,364 @@ void tampilkanTabelPerbandingan(const vector<double> &data, const vector<string>
     cout << string(70, '-') << "\n";
 }
 
-void tampilkanMenu() {
-    cout << "\nMenu Finance Planner:\n";
-    cout << "1. Input Data Baru\n";
-    cout << "2. Lihat Analisis Finansial\n";
-    cout << "3. Lihat Riwayat Data\n";
-    cout << "4. Simulasi Skenario\n";
-    cout << "5. Ekspor Data ke CSV\n";
-    cout << "6. Tambah Tujuan Keuangan\n";
-    cout << "7. Lihat Tujuan Keuangan\n";
-    cout << "8. Hitung Pajak Penghasilan\n";
-    cout << "9. Buat Laporan Keuangan Berkala\n";
-    cout << "10. Konversi Mata Uang\n";
-    cout << "11. Keluar\n";
-    cout << "Pilih menu (1-11): ";
+void displayMenu() {
+    cout << "\nFinance Planner Menu:\n";
+    cout << "1. Input New Data\n";
+    cout << "2. View Financial Analysis\n";
+    cout << "3. View Data History\n";
+    cout << "4. Simulate Scenario\n";
+    cout << "5. Export Data to CSV\n";
+    cout << "6. Add Financial Goal\n";
+    cout << "7. View Financial Goals\n";
+    cout << "8. Calculate Income Tax\n";
+    cout << "9. Create Periodic Financial Report\n";
+    cout << "10. Currency Conversion\n";
+    cout << "11. Exit\n";
+    cout << "Choose an option (1-11): ";
 }
 
-void inputDataBaru(UserData &userData) {
+void inputNewData(UserData &userData) {
     while (true)
     {
-        cout << "Masukkan usia Anda: ";
-        if (cin >> userData.usia && userData.usia > 0 && userData.usia < 120)
+        cout << "Enter your age: ";
+        if (cin >> userData.age && userData.age > 0 && userData.age < 120)
             break;
-        cout << "Input tidak valid. Mohon masukkan usia yang benar.\n";
+        cout << "Invalid input. Please enter a valid age.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
     while (true)
     {
-        cout << "Masukkan pendapatan tahunan Anda: Rp";
-        if (cin >> userData.pendapatanTahunan && userData.pendapatanTahunan >= 0)
+        cout << "Enter your annual income: $";
+        if (cin >> userData.annualIncome && userData.annualIncome >= 0)
             break;
-        cout << "Input tidak valid. Mohon masukkan pendapatan yang benar.\n";
+        cout << "Invalid input. Please enter a valid income.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
     while (true)
     {
-        cout << "Masukkan tabungan saat ini: Rp";
-        if (cin >> userData.tabunganSaatIni && userData.tabunganSaatIni >= 0)
+        cout << "Enter your current savings: $";
+        if (cin >> userData.currentSavings && userData.currentSavings >= 0)
             break;
-        cout << "Input tidak valid. Mohon masukkan tabungan yang benar.\n";
+        cout << "Invalid input. Please enter a valid savings amount.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    simpanData(userData);
-    cout << "Data berhasil disimpan.\n";
+    saveData(userData);
+    cout << "Data successfully saved.\n";
 }
 
-void lihatAnalisisFinansial(const UserData &userData, double inflasiTahunan) {
-    cout << "\n=== Analisis Finansial ===\n";
+void viewFinancialAnalysis(const UserData &userData, double annualInflation) {
+    cout << "\n=== Financial Analysis ===\n";
 
-    // Pensiun
-    double targetPensiun = hitungTargetPensiun(userData.usia, userData.pendapatanTahunan);
-    cout << "1. Target Tabungan Pensiun: Rp" << fixed << setprecision(2) << targetPensiun << endl;
+    // Retirement
+    double retirementTarget = calculateRetirementTarget(userData.age, userData.annualIncome);
+    cout << "1. Retirement Savings Target: $" << fixed << setprecision(2) << retirementTarget << endl;
 
-    // Investasi
-    cout << "\n2. Saran Investasi:\n"
-         << saranInvestasi(userData.usia) << endl;
+    // Investment
+    cout << "\n2. Investment Advice:\n"
+         << getInvestmentAdvice(userData.age) << endl;
 
-    // Anggaran
-    cout << "\n3. Anggaran Bulanan:\n";
-    hitungAnggaran(userData.pendapatanTahunan / 12);
+    // Budget
+    cout << "\n3. Monthly Budget:\n";
+    calculateBudget(userData.annualIncome / 12);
 
-    // Perencanaan Rumah
-    double hargaRumah = 500000000; // Asumsi harga rumah
-    int tenorTahun = 20;
-    double sukuBunga = 5.0;
-    double cicilanBulanan = hitungCicilanRumah(hargaRumah, tenorTahun, sukuBunga);
-    cout << "\n4. Perencanaan Pembelian Rumah:\n";
-    cout << "   Cicilan bulanan untuk rumah seharga Rp" << hargaRumah
-         << " (tenor " << tenorTahun << " tahun, bunga " << sukuBunga << "%): Rp"
-         << fixed << setprecision(2) << cicilanBulanan << endl;
+    // Home Planning
+    double housePrice = 500000; // Assumed house price
+    int loanTerm = 20;
+    double interestRate = 5.0;
+    double monthlyPayment = calculateMortgagePayment(housePrice, loanTerm, interestRate);
+    cout << "\n4. Home Purchase Planning:\n";
+    cout << "   Monthly mortgage payment for a $" << housePrice
+         << " house (term " << loanTerm << " years, interest " << interestRate << "%): $"
+         << fixed << setprecision(2) << monthlyPayment << endl;
 
-    // Pendidikan Anak
-    double biayaKuliahAwal = 50000000; // Asumsi biaya kuliah awal
-    int tahunMulaiKuliah = 18;
-    int lamaKuliah = 4;
-    double totalBiayaKuliah = hitungBiayaPendidikan(biayaKuliahAwal, tahunMulaiKuliah, lamaKuliah, inflasiTahunan);
-    cout << "\n5. Perencanaan Pendidikan Anak:\n";
-    cout << "   Total biaya pendidikan anak (kuliah): Rp" << fixed << setprecision(2) << totalBiayaKuliah << endl;
+    // Child Education
+    double initialTuitionFee = 50000; // Assumed initial tuition fee
+    int yearsUntilCollege = 18;
+    int collegeDuration = 4;
+    double totalEducationCost = calculateEducationCost(initialTuitionFee, yearsUntilCollege, collegeDuration, annualInflation);
+    cout << "\n5. Child Education Planning:\n";
+    cout << "   Total education cost (college): $" << fixed << setprecision(2) << totalEducationCost << endl;
 
-    // Asuransi Jiwa
-    int usiaPensiun = 65;
-    double kebutuhanAsuransi = hitungKebutuhanAsuransiJiwa(userData.pendapatanTahunan, userData.usia, usiaPensiun);
-    cout << "\n6. Kebutuhan Asuransi Jiwa:\n";
-    cout << "   Jumlah asuransi jiwa yang disarankan: Rp" << fixed << setprecision(2) << kebutuhanAsuransi << endl;
+    // Life Insurance
+    int retirementAge = 65;
+    double insuranceNeeds = calculateLifeInsuranceNeeds(userData.annualIncome, userData.age, retirementAge);
+    cout << "\n6. Life Insurance Needs:\n";
+    cout << "   Recommended life insurance amount: $" << fixed << setprecision(2) << insuranceNeeds << endl;
 
-    // Visualisasi
-    vector<double> dataVisualisasi = {
-        userData.tabunganSaatIni,
-        targetPensiun,
-        totalBiayaKuliah,
-        kebutuhanAsuransi
+    // Visualization
+    vector<double> visualizationData = {
+        userData.currentSavings,
+        retirementTarget,
+        totalEducationCost,
+        insuranceNeeds
     };
     vector<string> labels = {
-        "Tabungan Saat Ini",
-        "Target Pensiun",
-        "Biaya Kuliah",
-        "Kebutuhan Asuransi"
+        "Current Savings",
+        "Retirement Target",
+        "Education Cost",
+        "Insurance Needs"
     };
-    tampilkanTabelPerbandingan(dataVisualisasi, labels);
+    displayComparisonTable(visualizationData, labels);
 }
 
-void lihatRiwayatData() {
-    vector<UserData> riwayatData = bacaData();
-    cout << "\nRiwayat Data Keuangan:\n";
-    for (const auto &data : riwayatData)
+void viewDataHistory() {
+    vector<UserData> dataHistory = readData();
+    cout << "\nData History:\n";
+    for (const auto &data : dataHistory)
     {
-        cout << "Usia: " << data.usia << ", Pendapatan: Rp" << data.pendapatanTahunan
-             << ", Tabungan: Rp" << data.tabunganSaatIni << endl;
+        cout << "Age: " << data.age << ", Income: $" << data.annualIncome
+             << ", Savings: $" << data.currentSavings << endl;
     }
 }
 
-void simulasiSkenario(const UserData &userData) {
-    double perubahanPendapatan;
-    cout << "Masukkan persentase perubahan pendapatan (contoh: 10 untuk kenaikan 10%, -10 untuk penurunan 10%): ";
-    cin >> perubahanPendapatan;
+void simulateScenario(const UserData &userData) {
+    double incomeChange;
+    cout << "Enter income change percentage (e.g., 10 for 10% increase, -10 for 10% decrease): ";
+    cin >> incomeChange;
 
-    UserData skenarioData = userData;
-    skenarioData.pendapatanTahunan *= (1 + perubahanPendapatan / 100);
+    UserData scenarioData = userData;
+    scenarioData.annualIncome *= (1 + incomeChange / 100);
 
-    cout << "\n=== Hasil Simulasi Skenario ===\n";
-    cout << "Pendapatan baru: Rp" << fixed << setprecision(2) << skenarioData.pendapatanTahunan << endl;
-    lihatAnalisisFinansial(skenarioData, 3.0); // Asumsi inflasi 3%
+    cout << "\n=== Scenario Simulation Results ===\n";
+    cout << "New income: $" << fixed << setprecision(2) << scenarioData.annualIncome << endl;
+    viewFinancialAnalysis(scenarioData, 3.0); // Assume 3% inflation
 }
 
-void eksporDataKeCSV(const UserData &userData) {
-    ofstream file("analisis_finansial.csv");
+void exportDataToCSV(const UserData &userData) {
+    ofstream file("financial_analysis.csv");
     if (file.is_open()) {
-        file << fixed << setprecision(0); // Set presisi untuk angka bulat
+        file << fixed << setprecision(0); // Set precision for integers
         
-        file << "Kategori,Nilai\n";
-        file << "Usia," << userData.usia << "\n";
-        file << "Pendapatan Tahunan," << userData.pendapatanTahunan << "\n";
-        file << "Tabungan Saat Ini," << userData.tabunganSaatIni << "\n";
+        file << "Category,Value\n";
+        file << "Age," << userData.age << "\n";
+        file << "Annual Income," << userData.annualIncome << "\n";
+        file << "Current Savings," << userData.currentSavings << "\n";
         
-        file << setprecision(2); // Set presisi 2 angka di belakang koma untuk perhitungan finansial
-        file << "Target Pensiun," << hitungTargetPensiun(userData.usia, userData.pendapatanTahunan) << "\n";
+        file << setprecision(2); // Set precision to 2 decimal places for financial calculations
+        file << "Retirement Target," << calculateRetirementTarget(userData.age, userData.annualIncome) << "\n";
         
-        double inflasiTahunan = 3.0;
-        double hargaRumah = 500000000;
-        int tenorTahun = 20;
-        double sukuBunga = 5.0;
-        double biayaKuliahAwal = 50000000;
-        int tahunMulaiKuliah = 18;
-        int lamaKuliah = 4;
-        int usiaPensiun = 65;
+        double annualInflation = 3.0;
+        double housePrice = 500000;
+        int loanTerm = 20;
+        double interestRate = 5.0;
+        double initialTuitionFee = 50000;
+        int yearsUntilCollege = 18;
+        int collegeDuration = 4;
+        int retirementAge = 65;
 
-        file << "Cicilan Rumah Bulanan," << hitungCicilanRumah(hargaRumah, tenorTahun, sukuBunga) << "\n";
-        file << "Total Biaya Pendidikan," << hitungBiayaPendidikan(biayaKuliahAwal, tahunMulaiKuliah, lamaKuliah, inflasiTahunan) << "\n";
-        file << "Kebutuhan Asuransi Jiwa," << hitungKebutuhanAsuransiJiwa(userData.pendapatanTahunan, userData.usia, usiaPensiun) << "\n";
+        file << "Monthly Mortgage Payment," << calculateMortgagePayment(housePrice, loanTerm, interestRate) << "\n";
+        file << "Total Education Cost," << calculateEducationCost(initialTuitionFee, yearsUntilCollege, collegeDuration, annualInflation) << "\n";
+        file << "Life Insurance Needs," << calculateLifeInsuranceNeeds(userData.annualIncome, userData.age, retirementAge) << "\n";
 
         file.close();
-        cout << "Data berhasil diekspor ke analisis_finansial.csv\n";
+        cout << "Data successfully exported to financial_analysis.csv\n";
     } else {
-        cout << "Gagal membuka file untuk ekspor data.\n";
+        cout << "Failed to open file for data export.\n";
     }
 }
 
-// Tambahkan fungsi ini untuk menyimpan data pengguna
-void simpanUserData(const UserData &userData) {
+// Add this function to save user data
+void saveUserData(const UserData &userData) {
     ofstream file("user_data.txt");
     if (file.is_open()) {
-        file << userData.usia << "\n";
-        file << userData.pendapatanTahunan << "\n";
-        file << userData.tabunganSaatIni << "\n";
+        file << userData.age << "\n";
+        file << userData.annualIncome << "\n";
+        file << userData.currentSavings << "\n";
         file.close();
-        cout << "Data pengguna berhasil disimpan.\n";
+        cout << "User data successfully saved.\n";
     } else {
-        cout << "Gagal menyimpan data pengguna.\n";
+        cout << "Failed to save user data.\n";
     }
 }
 
-// Tambahkan fungsi ini untuk memuat data pengguna
-bool muatUserData(UserData &userData) {
+// Add this function to load user data
+bool loadUserData(UserData &userData) {
     ifstream file("user_data.txt");
     if (file.is_open()) {
-        file >> userData.usia;
-        file >> userData.pendapatanTahunan;
-        file >> userData.tabunganSaatIni;
+        file >> userData.age;
+        file >> userData.annualIncome;
+        file >> userData.currentSavings;
         file.close();
-        cout << "Data pengguna berhasil dimuat.\n";
+        cout << "User data successfully loaded.\n";
         return true;
     }
     return false;
 }
 
-// Tambahkan fungsi ini untuk input inflasi
-double inputInflasi() {
-    double inflasi;
+// Add this function to input inflation
+double inputInflation() {
+    double inflation;
     while (true) {
-        cout << "Masukkan perkiraan tingkat inflasi tahunan (%): ";
-        if (cin >> inflasi && inflasi >= 0 && inflasi <= 100) {
-            return inflasi;
+        cout << "Enter estimated annual inflation rate (%): ";
+        if (cin >> inflation && inflation >= 0 && inflation <= 100) {
+            return inflation;
         }
-        cout << "Input tidak valid. Mohon masukkan nilai antara 0 dan 100.\n";
+        cout << "Invalid input. Please enter a value between 0 and 100.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
-// Tambahkan struktur data baru
-struct TujuanKeuangan {
-    string nama;
+// Add new data structure
+struct FinancialGoal {
+    string name;
     double target;
-    double progres;
-    string tanggalTarget;
+    double progress;
+    string targetDate;
 };
 
-// Tambahkan fungsi untuk menambah tujuan keuangan
-void tambahTujuanKeuangan(vector<TujuanKeuangan> &tujuanList) {
-    TujuanKeuangan tujuan;
-    cout << "Masukkan nama tujuan keuangan: ";
+// Add function to add financial goal
+void addFinancialGoal(vector<FinancialGoal> &goalList) {
+    FinancialGoal goal;
+    cout << "Enter financial goal name: ";
     cin.ignore();
-    getline(cin, tujuan.nama);
-    cout << "Masukkan target nominal (Rp): ";
-    cin >> tujuan.target;
-    cout << "Masukkan progres saat ini (Rp): ";
-    cin >> tujuan.progres;
-    cout << "Masukkan tanggal target (DD/MM/YYYY): ";
-    cin >> tujuan.tanggalTarget;
-    tujuanList.push_back(tujuan);
-    cout << "Tujuan keuangan berhasil ditambahkan.\n";
+    getline(cin, goal.name);
+    cout << "Enter target amount ($): ";
+    cin >> goal.target;
+    cout << "Enter current progress ($): ";
+    cin >> goal.progress;
+    cout << "Enter target date (DD/MM/YYYY): ";
+    cin >> goal.targetDate;
+    goalList.push_back(goal);
+    cout << "Financial goal successfully added.\n";
 }
 
-// Tambahkan fungsi untuk menampilkan tujuan keuangan
-void tampilkanTujuanKeuangan(const vector<TujuanKeuangan> &tujuanList) {
-    cout << "\n=== Tujuan Keuangan ===\n";
-    for (const auto &tujuan : tujuanList) {
-        cout << "Nama: " << tujuan.nama << "\n";
-        cout << "Target: Rp" << fixed << setprecision(2) << tujuan.target << "\n";
-        cout << "Progres: Rp" << tujuan.progres << " (" 
-             << (tujuan.progres / tujuan.target * 100) << "%)\n";
-        cout << "Tanggal Target: " << tujuan.tanggalTarget << "\n\n";
+// Add function to display financial goals
+void displayFinancialGoals(const vector<FinancialGoal> &goalList) {
+    cout << "\n=== Financial Goals ===\n";
+    for (const auto &goal : goalList) {
+        cout << "Name: " << goal.name << "\n";
+        cout << "Target: $" << fixed << setprecision(2) << goal.target << "\n";
+        cout << "Progress: $" << goal.progress << " (" 
+             << (goal.progress / goal.target * 100) << "%)\n";
+        cout << "Target Date: " << goal.targetDate << "\n\n";
     }
 }
 
-// Tambahkan fungsi untuk menyimpan tujuan keuangan
-void simpanTujuanKeuangan(const vector<TujuanKeuangan> &tujuanList) {
-    ofstream file("tujuan_keuangan.txt");
+// Add function to save financial goals
+void saveFinancialGoals(const vector<FinancialGoal> &goalList) {
+    ofstream file("financial_goals.txt");
     if (file.is_open()) {
-        for (const auto &tujuan : tujuanList) {
-            file << tujuan.nama << "," << tujuan.target << "," << tujuan.progres << "," << tujuan.tanggalTarget << "\n";
+        for (const auto &goal : goalList) {
+            file << goal.name << "," << goal.target << "," << goal.progress << "," << goal.targetDate << "\n";
         }
         file.close();
-        cout << "Tujuan keuangan berhasil disimpan.\n";
+        cout << "Financial goals successfully saved.\n";
     } else {
-        cout << "Gagal menyimpan tujuan keuangan.\n";
+        cout << "Failed to save financial goals.\n";
     }
 }
 
-// Tambahkan fungsi untuk memuat tujuan keuangan
-vector<TujuanKeuangan> muatTujuanKeuangan() {
-    vector<TujuanKeuangan> tujuanList;
-    ifstream file("tujuan_keuangan.txt");
+// Add function to load financial goals
+vector<FinancialGoal> loadFinancialGoals() {
+    vector<FinancialGoal> goalList;
+    ifstream file("financial_goals.txt");
     if (file.is_open()) {
         string line;
         while (getline(file, line)) {
             stringstream ss(line);
-            TujuanKeuangan tujuan;
+            FinancialGoal goal;
             string temp;
-            getline(ss, tujuan.nama, ',');
+            getline(ss, goal.name, ',');
             getline(ss, temp, ',');
-            tujuan.target = stod(temp);
+            goal.target = stod(temp);
             getline(ss, temp, ',');
-            tujuan.progres = stod(temp);
-            getline(ss, tujuan.tanggalTarget);
-            tujuanList.push_back(tujuan);
+            goal.progress = stod(temp);
+            getline(ss, goal.targetDate);
+            goalList.push_back(goal);
         }
         file.close();
-        cout << "Tujuan keuangan berhasil dimuat.\n";
+        cout << "Financial goals successfully loaded.\n";
     }
-    return tujuanList;
+    return goalList;
 }
 
-// Tambahkan fungsi untuk menghitung pajak penghasilan sederhana
-double hitungPajakPenghasilan(double pendapatanTahunan) {
-    if (pendapatanTahunan <= 50000000) {
-        return pendapatanTahunan * 0.05;
-    } else if (pendapatanTahunan <= 250000000) {
-        return 2500000 + (pendapatanTahunan - 50000000) * 0.15;
+// Add function to calculate income tax
+double calculateIncomeTax(double annualIncome) {
+    if (annualIncome <= 50000) {
+        return annualIncome * 0.05;
+    } else if (annualIncome <= 250000) {
+        return 2500 + (annualIncome - 50000) * 0.15;
     } else {
-        return 32500000 + (pendapatanTahunan - 250000000) * 0.25;
+        return 32500 + (annualIncome - 250000) * 0.25;
     }
 }
 
-// Tambahkan fungsi untuk membuat laporan keuangan berkala
-void buatLaporanKeuanganBerkala(const UserData &userData, const vector<TujuanKeuangan> &tujuanList) {
-    ofstream file("laporan_keuangan.txt");
+// Add function to create periodic financial report
+void createPeriodicFinancialReport(const UserData &userData, const vector<FinancialGoal> &goalList) {
+    ofstream file("financial_report.txt");
     if (file.is_open()) {
-        file << "=== Laporan Keuangan Berkala ===\n\n";
-        file << "Data Pengguna:\n";
-        file << "Usia: " << userData.usia << "\n";
-        file << "Pendapatan Tahunan: Rp" << fixed << setprecision(2) << userData.pendapatanTahunan << "\n";
-        file << "Tabungan Saat Ini: Rp" << userData.tabunganSaatIni << "\n\n";
+        file << "=== Periodic Financial Report ===\n\n";
+        file << "User Data:\n";
+        file << "Age: " << userData.age << "\n";
+        file << "Annual Income: $" << fixed << setprecision(2) << userData.annualIncome << "\n";
+        file << "Current Savings: $" << userData.currentSavings << "\n\n";
 
-        file << "Tujuan Keuangan:\n";
-        for (const auto &tujuan : tujuanList) {
-            file << "- " << tujuan.nama << ": Rp" << tujuan.target 
-                 << " (Progres: " << (tujuan.progres / tujuan.target * 100) << "%)\n";
+        file << "Financial Goals:\n";
+        for (const auto &goal : goalList) {
+            file << "- " << goal.name << ": $" << goal.target 
+                 << " (Progress: " << (goal.progress / goal.target * 100) << "%)\n";
         }
 
-        file << "\nAnalisis Finansial:\n";
-        file << "Target Pensiun: Rp" << hitungTargetPensiun(userData.usia, userData.pendapatanTahunan) << "\n";
-        file << "Estimasi Pajak Penghasilan: Rp" << hitungPajakPenghasilan(userData.pendapatanTahunan) << "\n";
+        file << "\nFinancial Analysis:\n";
+        file << "Retirement Target: $" << calculateRetirementTarget(userData.age, userData.annualIncome) << "\n";
+        file << "Estimated Income Tax: $" << calculateIncomeTax(userData.annualIncome) << "\n";
 
         file.close();
-        cout << "Laporan keuangan berhasil dibuat dan disimpan dalam file 'laporan_keuangan.txt'.\n";
+        cout << "Financial report successfully created and saved in 'financial_report.txt'.\n";
     } else {
-        cout << "Gagal membuat laporan keuangan.\n";
+        cout << "Failed to create financial report.\n";
     }
 }
 
-// Tambahkan fungsi untuk konversi mata uang
-double konversiMataUang(double jumlah, string dari, string ke) {
-    // Kurs mata uang terhadap IDR (contoh, perlu diperbarui secara berkala)
-    const double USD_TO_IDR = 14500;
-    const double EUR_TO_IDR = 17000;
-    const double SGD_TO_IDR = 10800;
+// Add function for currency conversion
+double convertCurrency(double amount, string from, string to) {
+    // Currency exchange rates against USD (example, needs to be updated regularly)
+    const double EUR_TO_USD = 0.85;
+    const double GBP_TO_USD = 0.73;
+    const double JPY_TO_USD = 0.0071;
+    const double IDR_TO_USD = 0.000067; // Approximate rate, 1 USD = 15,000 IDR
 
-    double hasilIDR;
+    double usdAmount;
 
-    if (dari == "IDR") {
-        hasilIDR = jumlah;
-    } else if (dari == "USD") {
-        hasilIDR = jumlah * USD_TO_IDR;
-    } else if (dari == "EUR") {
-        hasilIDR = jumlah * EUR_TO_IDR;
-    } else if (dari == "SGD") {
-        hasilIDR = jumlah * SGD_TO_IDR;
+    if (from == "USD") {
+        usdAmount = amount;
+    } else if (from == "EUR") {
+        usdAmount = amount * EUR_TO_USD;
+    } else if (from == "GBP") {
+        usdAmount = amount * GBP_TO_USD;
+    } else if (from == "JPY") {
+        usdAmount = amount * JPY_TO_USD;
+    } else if (from == "IDR") {
+        usdAmount = amount * IDR_TO_USD;
     } else {
-        cout << "Mata uang asal tidak dikenal.\n";
+        cout << "Unknown source currency.\n";
         return -1;
     }
 
-    if (ke == "IDR") {
-        return hasilIDR;
-    } else if (ke == "USD") {
-        return hasilIDR / USD_TO_IDR;
-    } else if (ke == "EUR") {
-        return hasilIDR / EUR_TO_IDR;
-    } else if (ke == "SGD") {
-        return hasilIDR / SGD_TO_IDR;
+    if (to == "USD") {
+        return usdAmount;
+    } else if (to == "EUR") {
+        return usdAmount / EUR_TO_USD;
+    } else if (to == "GBP") {
+        return usdAmount / GBP_TO_USD;
+    } else if (to == "JPY") {
+        return usdAmount / JPY_TO_USD;
+    } else if (to == "IDR") {
+        return usdAmount / IDR_TO_USD;
     } else {
-        cout << "Mata uang tujuan tidak dikenal.\n";
+        cout << "Unknown target currency.\n";
         return -1;
     }
 }
 
-// Modifikasi fungsi main() untuk menggunakan fitur baru
+// Modify main() function to use new features
 int main()
 {
     cout << R"(
@@ -509,84 +514,84 @@ int main()
 )" << '\n';
 
     cout << "==================================\n";
-    cout << "   Selamat datang di Finance Planner\n";
-    cout << "   Asisten Keuangan Pribadi Anda\n";
+    cout << "   Welcome to Finance Planner\n";
+    cout << "   Your Personal Financial Assistant\n";
     cout << "==================================\n\n";
 
     UserData userData;
-    if (!muatUserData(userData)) {
-        inputDataBaru(userData);
+    if (!loadUserData(userData)) {
+        inputNewData(userData);
     }
 
-    double inflasiTahunan = inputInflasi();
+    double annualInflation = inputInflation();
 
-    vector<TujuanKeuangan> tujuanList = muatTujuanKeuangan();
+    vector<FinancialGoal> goalList = loadFinancialGoals();
 
-    int pilihan;
+    int choice;
     do {
-        tampilkanMenu();
-        cin >> pilihan;
+        displayMenu();
+        cin >> choice;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        switch(pilihan) {
+        switch(choice) {
             case 1:
-                inputDataBaru(userData);
-                simpanUserData(userData);
+                inputNewData(userData);
+                saveUserData(userData);
                 break;
             case 2:
-                lihatAnalisisFinansial(userData, inflasiTahunan);
+                viewFinancialAnalysis(userData, annualInflation);
                 break;
             case 3:
-                lihatRiwayatData();
+                viewDataHistory();
                 break;
             case 4:
-                simulasiSkenario(userData);
+                simulateScenario(userData);
                 break;
             case 5:
-                eksporDataKeCSV(userData);
+                exportDataToCSV(userData);
                 break;
             case 6:
-                tambahTujuanKeuangan(tujuanList);
-                simpanTujuanKeuangan(tujuanList);
+                addFinancialGoal(goalList);
+                saveFinancialGoals(goalList);
                 break;
             case 7:
-                tampilkanTujuanKeuangan(tujuanList);
+                displayFinancialGoals(goalList);
                 break;
             case 8:
                 {
-                    double pajak = hitungPajakPenghasilan(userData.pendapatanTahunan);
-                    cout << "Estimasi Pajak Penghasilan: Rp" << fixed << setprecision(2) << pajak << endl;
-                    cout << "Pendapatan Setelah Pajak: Rp" << (userData.pendapatanTahunan - pajak) << endl;
+                    double tax = calculateIncomeTax(userData.annualIncome);
+                    cout << "Estimated Income Tax: $" << fixed << setprecision(2) << tax << endl;
+                    cout << "After-Tax Income: $" << (userData.annualIncome - tax) << endl;
                 }
                 break;
             case 9:
-                buatLaporanKeuanganBerkala(userData, tujuanList);
+                createPeriodicFinancialReport(userData, goalList);
                 break;
             case 10:
                 {
-                    double jumlah;
-                    string dari, ke;
-                    cout << "Masukkan jumlah uang: ";
-                    cin >> jumlah;
-                    cout << "Masukkan mata uang asal (IDR/USD/EUR/SGD): ";
-                    cin >> dari;
-                    cout << "Masukkan mata uang tujuan (IDR/USD/EUR/SGD): ";
-                    cin >> ke;
-                    double hasil = konversiMataUang(jumlah, dari, ke);
-                    if (hasil != -1) {
-                        cout << jumlah << " " << dari << " = " << fixed << setprecision(2) << hasil << " " << ke << endl;
+                    double amount;
+                    string from, to;
+                    cout << "Enter amount: ";
+                    cin >> amount;
+                    cout << "Enter source currency (USD/EUR/GBP/JPY/IDR): ";
+                    cin >> from;
+                    cout << "Enter target currency (USD/EUR/GBP/JPY/IDR): ";
+                    cin >> to;
+                    double result = convertCurrency(amount, from, to);
+                    if (result != -1) {
+                        cout << amount << " " << from << " = " << fixed << setprecision(2) << result << " " << to << endl;
                     }
                 }
                 break;
             case 11:
-                simpanUserData(userData);
-                simpanTujuanKeuangan(tujuanList);
-                cout << "Data berhasil disimpan. Terima kasih telah menggunakan Finance Planner!\n";
+                saveUserData(userData);
+                saveFinancialGoals(goalList);
+                cout << "Data saved successfully. Thank you for using Finance Planner!\n";
                 break;
             default:
-                cout << "Pilihan tidak valid. Silakan coba lagi.\n";
+                cout << "Invalid choice. Please try again.\n";
         }
-    } while (pilihan != 11);
+    } while (choice != 11);
 
     return 0;
 }
